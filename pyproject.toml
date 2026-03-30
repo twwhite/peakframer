@@ -2,6 +2,8 @@
 name = "peakframer"
 dynamic = ["version"]
 description = "Extract n-maximally diverse frames from video using visual embeddings"
+keywords = ["video", "frame-extraction", "clip", "embeddings", "computer-vision", "dataset"]
+authors = [{ name = "Tim White", email = "tim@timwhite.io" }]
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
@@ -14,6 +16,10 @@ dependencies = [
     "torch>=2.11.0",
     "typer>=0.24.1",
 ]
+
+[project.urls]
+Homepage = "https://github.com/twwhite/peakframer"
+Issues = "https://github.com/twwhite/peakframer/issues"
 
 [dependency-groups]
 dev = [
@@ -35,3 +41,6 @@ path = "peakframer/__init__.py"
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP"]
+
+[tool.hatch.build.targets.wheel]
+exclude = ["assets/"]

@@ -61,7 +61,11 @@ def run(
 ) -> None:
     from peakframer.embedder import CLIPEmbedder
     from peakframer.extractor import extract_frames, get_video_meta, suggest_sample_rate
-    from peakframer.sampler import select_diverse_indices
+    from peakframer.sampler import (
+        compute_diversity_score,
+        compute_random_baseline,
+        select_diverse_indices,
+    )
 
     set_log_level(debug)
 
@@ -132,6 +136,14 @@ def run(
         filename = f"frame_{rank:04d}_t{ts:.3f}s.jpg"
         cv2.imwrite(str(output / filename), frame.image)
 
+    score = compute_diversity_score(embeddings, selected_indices)
+    baseline = compute_random_baseline(embeddings, count=count)
+    improvement = (score - baseline) / baseline * 100
+    logger.info(
+        f"Diversity score: {score:.3f} "
+        f"(random baseline: {baseline:.3f}) "
+        f"↑ {improvement:.1f}% more diverse"
+    )
     logger.info(f"Saved {len(selected_indices)} frames to {output}")
 
 

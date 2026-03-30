@@ -11,6 +11,8 @@ uv sync --group dev
 
 ## Usage
 ```bash
+peakframer --version
+
 peakframer video.mp4 --count 50
 peakframer video.mp4 --count 100 --output ./frames --sample-rate 10
 peakframer video.mp4 --count 50 --debug
